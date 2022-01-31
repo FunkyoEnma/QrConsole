@@ -25,3 +25,6 @@ def get_terminal_size():
             sizex, sizey = 80, 25 # can't determine actual size - return default values
 
         return sizex, sizey
+
+    else:
+        return os.get_terminal_size()
