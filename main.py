@@ -118,6 +118,55 @@ class QrConsole:
 
             input()
 
+    def __print_ln(self, data: str, text_space: int, end="\n"):
+        print(Back.BLACK + Fore.WHITE, end="")
+        __org_data = data
+        __center = 0
+        __centred = False
+        __right = False
+        __format = False
+
+        if re.match("^<\[center].*", data.rstrip().lstrip()) is not None:
+            data = data.replace("<[center]", "", 1)
+            data = data.rstrip().lstrip().center(text_space)
+            __centred = True
+        elif re.match("^<\[right].*", data.lstrip().rstrip()) is not None:
+            data = data.replace("<[right]", "", 1)
+            data = data.rstrip().lstrip().rjust(text_space)
+            __right = True
+
+        if re.match("^<\*\*.*", data.lstrip().rstrip()) is not None:
+            data = data.split("<**", 1)[1]
+
+            if __centred:
+                __center = (text_space - len(data.rstrip().lstrip())) // 2
+                data = (Back.BLACK + Fore.WHITE + " " * __center +
+                        Back.WHITE + Fore.BLACK + data.rstrip() + Back.BLACK + Fore.WHITE)
+
+            if __right:
+                if re.match("^<\[fill=.].*", data.lstrip().rstrip()) is None:
+                    __center = text_space - len(data.lstrip().rstrip())
+                    data = Back.BLACK + Fore.WHITE + " " * __center + Back.WHITE + Fore.BLACK + data.lstrip().rstrip() \
+                           + Style.RESET_ALL
+                else:
+                    __format = True
+
+        if re.match("^<\[fill=.].*", data.lstrip().rstrip()) is not None:
+            fill = data.split("<[fill=", 1)[1][0]
+            data = data.replace(f"<[fill={fill}]", "", 1)
+
+            data = data.lstrip().rstrip()
+
+            if __centred:
+                if not __format:
+                    data = data.center(text_space - len(data), fill)
+            if __right:
+                data = data.rjust(text_space, fill)
+            else:
+                data = data + (fill * (text_space - (len(data))))
+
+        print(data, end=end)
+
     @property
     def available_shorteners(self):
         """Obtener todos los acortadores disponibles para el link proporcionado"""
