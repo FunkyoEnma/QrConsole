@@ -57,14 +57,14 @@ class QrConsole:
         """
         
         self.__shorter = pyshorteners.Shortener()
-        self.__lengths = {'chilpit': 23, 'clckru': 21, 'dagd': 20, 'isgd': 20, 'osdb': 22, 'tinyurl': 28}
+        self.__lengths = {}
         self.__url = url
-        self.__short = {"tinyurl": "https://tinyurl.com/3shnvrmv"}
+        self.__short = {}
         self.__shorteners = []
         self.__text = text
         #s = s.tinyurl.short("https://recursospython.com/guias-y-manuales/generar-codigo-qr/")
     
-    def __call__(self, shortener: str = "tinyurl", save_name: str = None):
+    def __call__(self, shortener: str = None, save_name: str = None):
         f"""Generar codigo qr para el link {self.__url}.
         parameters:
         shortener -- acortador de enlaces a usar, para ver cuales estan disponibles se puede usar la función
@@ -85,7 +85,7 @@ class QrConsole:
             url_short = _.short(self.__url)
 
         # Se genera el codigo qr del link deseado #### Reemplazar despues de pruebas ####
-        img = qrcode.make("https://tinyurl.com/3shnvrmv".replace("https://", "").replace("http://", ""),
+        img = qrcode.make(url_short.replace("https://", "").replace("http://", ""),
                         border=0, box_size=1)
 
         # convertir la imagen a una lista de valores de 0 o 255 dependiendo del color
@@ -232,7 +232,3 @@ class QrConsole:
     def __move (y, x):
         """Mover el cursor de posición"""
         print(f"\033[{y};{x}H", end="")
-
-
-qr = QrConsole("https://rosettacode.org/wiki/Terminal_control/Cursor_positioning")
-qr()
