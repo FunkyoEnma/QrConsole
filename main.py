@@ -21,6 +21,39 @@ class QrConsole:
         qr = QrConsole("https://github.com/FunkyoEnma/QrConsole")
 
         qr()
+
+        ****
+
+        Uso del apartado texto:
+        ****
+        Este apartado es meramente opcional y en caso de no marcarse se necesitara menos tamaño en la consola
+        ////
+
+        [Recomendaciones]
+        ////
+
+        - Procurar que los textos no sean mas grandes al espacio disponible a la derecha del codigo (No se cuenta etiquetas ni formatos con \\\\033[1 etc...)
+
+        - Los codigos de formato deben de ir siempre dentro de las etiquetas
+
+        [Etiquetas]
+        ****
+        Las etiquetas siempre deben de ir en el siguiente orden, y se debe de procurar siempre seguir el mismo para evitar errores y estas mismas se deben colocar al inicio de la linea deseada
+        ////
+
+        **Alineacion** Esta etiqueta como su nombre lo indica permite configurar la alineacion del texto, teniendo las siguientes opciones:
+
+        - **<[center]** Permite centrar el texto en el espacio disponible
+        - **<[right]** Permite alinear el texto a la derecha en el espacio disponible
+
+        **Resaltado** Esta etiqueta permite resaltar la linea, colocando el fondo en blanco y las letras en negro, y su
+         etiqueta es <**
+
+        **Rellenado** Esta etiqueta permite rellenar el espacio libre de la linea con el caracter deseado, y su etiqueta
+        es <[fill=\ **?**\ ] donde **?** es el caracter deseado
+
+        :param url: Link del cual se desea generar el codigo qr
+        :param text: Texto a colocar en la parte derecha del qr, si se deja en blanco se necesitara menos tamaño de consola
         """
         
         self.__shorter = pyshorteners.Shortener()
