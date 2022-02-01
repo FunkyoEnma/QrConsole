@@ -13,7 +13,7 @@ colorama.init()
 
 class QrConsole:
 
-    def __init__(self, url: str = "https://linktr.ee/FunkyoEnma") -> None:
+    def __init__(self, url: str = "https://linktr.ee/FunkyoEnma", text: str = None) -> None:
         """Generador de codigos qr en consola, para usarlo se debe de pasar un argumento un link valido en formato str
 
         Para generar el qr en pantalla por favor vuelva a llamar la funcion. ej:
@@ -28,6 +28,7 @@ class QrConsole:
         self.__url = url
         self.__short = {"tinyurl": "https://tinyurl.com/3shnvrmv"}
         self.__shorteners = []
+        self.__text = text
         #s = s.tinyurl.short("https://recursospython.com/guias-y-manuales/generar-codigo-qr/")
     
     def __call__(self, shortener: str = "tinyurl", save_name: str = None):
