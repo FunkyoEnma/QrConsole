@@ -56,7 +56,7 @@ class QrConsole:
 
         # convertir la imagen a una lista de valores de 0 o 255 dependiendo del color
         img = img.get_image()
-        img.save(save_name)
+        img.save(save_name) if save_name is not None else ...
         w_img, h_img = img.size
         img = img.convert("L")
         img = list(img.getdata())
