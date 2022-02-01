@@ -99,9 +99,22 @@ class QrConsole:
                     print(*dat, sep="")
 
                     y += 1
-            
-            self.__move(y + margin + margin, (margin * 2) + 1)
-            print(Back.WHITE + Fore.BLACK + "QrConsole V-1.0.1 @FunkyoEnma 2022", end="")
+
+            __copyright = "QrConsole V-1.0.1 @FunkyoEnma 2022"
+
+            w_free = (w_img * 2) + (margin * 5) + 1
+
+            self.__move(y + margin + margin, int(((w_img * 2) + (margin * 3)) / 2) - int(len(__copyright) / 2) + 1)
+            print(Back.WHITE + Fore.BLACK + __copyright, end="")
+
+            if self.__text is not None:
+                text = self.__text.splitlines()
+
+                y = (h - len(text)) // 2
+
+                for i in range(len(text)):
+                    self.__move(y + i, w_free)
+                    self.__print_ln(text[i], w - w_free - 3)
 
             input()
 
