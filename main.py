@@ -1,9 +1,9 @@
 import os
+import re
 
 import qrcode
-from PIL import Image
 import colorama
-from colorama import Back, Fore
+from colorama import Back, Fore, Style
 
 from terminal import get_terminal_size
 import pyshorteners
