@@ -68,8 +68,8 @@ class QrConsole:
         h_min = h_img + (margin * 2)
         w_min = (w_img * 2) + (margin * 2)
 
-        if h < h_min or w < w_min:
-            print(f"Por favor cambie el tamaño de la ventana por lo menos a {w_min} columnas con {h_min} filas")
+        if h < h_min or w < w_min * (2 if self.__text is not None else 1):
+            print(f"Por favor cambie el tamaño de la ventana por lo menos a {w_min * 2} columnas con {h_min} filas")
 
         else:  # Codigo a mostrar si es mayor a lo requerido
 
